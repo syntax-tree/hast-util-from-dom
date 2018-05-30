@@ -4,7 +4,7 @@
   "description": "Transform a DOM tree to HAST",
   "main": "dist/hast-util-from-dom.js",
   "module": "dist/hast-util-from-dom.mjs",
-  "repository": "https://github.com/kmck/hast-util-from/dom/issues",
+  "repository": "https://github.com/kmck/hast-util-from-dom",
   "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
   "license": "ISC",
   "scripts": {
