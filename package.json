@@ -4,7 +4,7 @@
   "description": "Transform a DOM tree to HAST",
   "main": "dist/hast-util-from-dom.js",
   "module": "dist/hast-util-from-dom.mjs",
-  "repository": "https://github.com/kmck/hast-util-from/dom/issues",
+  "repository": "https://github.com/kmck/hast-util-from-dom",
   "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
   "license": "ISC",
   "scripts": {
@@ -23,13 +23,12 @@
     "eslint-plugin-import": "^2.12.0",
     "glob": "^7.1.2",
     "jest-cli": "^23.1.0",
-    "jsdom": "^11.11.0",
     "rollup": "^0.59.4"
+  },
+  "dependencies": {
+    "hastscript": "^3.1.0"
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "hastscript": "^3.1.0"
-  }
+  ]
 }

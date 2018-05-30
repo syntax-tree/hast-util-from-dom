@@ -1,16 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
-import jsdom from 'jsdom';
 
 import fromDOM from './index';
-
-const { JSDOM } = jsdom;
-
-function createDocumentFromHtml(htmlString) {
-  const dom = new JSDOM(htmlString);
-  return dom.window.document.documentElement.parentNode;
-}
 
 function createFragmentFromHtml(htmlString) {
   const fragment = document.createDocumentFragment();
@@ -22,6 +14,11 @@ function createFragmentFromHtml(htmlString) {
     child = tempEl.firstChild;
   }
   return fragment;
+}
+
+function createDocumentFromHtml(htmlString) {
+  const parser = new DOMParser();
+  return parser.parseFromString(htmlString, 'text/html');
 }
 
 describe('hast-util-from-dom', () => {
