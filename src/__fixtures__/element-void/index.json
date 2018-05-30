@@ -1,0 +1,232 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "element",
+      "tagName": "html",
+      "properties": {},
+      "children": [
+        {
+          "type": "element",
+          "tagName": "head",
+          "properties": {},
+          "children": []
+        },
+        {
+          "type": "element",
+          "tagName": "body",
+          "properties": {},
+          "children": [
+            {
+              "type": "element",
+              "tagName": "img",
+              "properties": {
+                "src": "http://example.com/fav.ico",
+                "alt": "foo",
+                "title": "bar"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "hr",
+              "properties": {},
+              "children": []
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "p",
+              "properties": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "this"
+                },
+                {
+                  "type": "element",
+                  "tagName": "br",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "value": "and that"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "p",
+              "properties": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "this"
+                },
+                {
+                  "type": "element",
+                  "tagName": "br",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "value": "and that"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "svg",
+              "properties": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tagName": "path",
+                  "properties": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tagName": "circle",
+                      "properties": {},
+                      "children": [
+                        {
+                          "type": "element",
+                          "tagName": "g",
+                          "properties": {},
+                          "children": [
+                            {
+                              "type": "element",
+                              "tagName": "rect",
+                              "properties": {},
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "svg",
+              "properties": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tagName": "path",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "element",
+                  "tagName": "circle",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "element",
+                  "tagName": "g",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "element",
+                  "tagName": "rect",
+                  "properties": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "math",
+              "properties": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tagName": "mglyph",
+                  "properties": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tagName": "mspace",
+                      "properties": {},
+                      "children": [
+                        {
+                          "type": "element",
+                          "tagName": "malignmark",
+                          "properties": {},
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "type": "element",
+              "tagName": "math",
+              "properties": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tagName": "mglyph",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "element",
+                  "tagName": "mspace",
+                  "properties": {},
+                  "children": []
+                },
+                {
+                  "type": "element",
+                  "tagName": "malignmark",
+                  "properties": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

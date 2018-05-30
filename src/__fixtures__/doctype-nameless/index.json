@@ -1,0 +1,30 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "doctype",
+      "name": "",
+      "public": null,
+      "system": null
+    },
+    {
+      "type": "element",
+      "tagName": "html",
+      "properties": {},
+      "children": [
+        {
+          "type": "element",
+          "tagName": "head",
+          "properties": {},
+          "children": []
+        },
+        {
+          "type": "element",
+          "tagName": "body",
+          "properties": {},
+          "children": []
+        }
+      ]
+    }
+  ]
+}
