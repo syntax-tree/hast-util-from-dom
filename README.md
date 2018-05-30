@@ -1,4 +1,4 @@
-# hast-util-from-parse5
+# hast-util-from-dom
 
 Transform a DOM tree to [HAST][]
 
