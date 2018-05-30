@@ -1,18 +1,17 @@
 {
   "name": "hast-util-from-dom",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Transform a DOM tree to HAST",
-  "main": "dist/hast-util-from-dom.cjs.js",
-  "module": "dist/hast-util-from-dom.esm.js",
+  "main": "dist/hast-util-from-dom.js",
+  "module": "dist/hast-util-from-dom.mjs",
   "repository": "https://github.com/kmck/hast-util-from/dom/issues",
   "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
   "license": "ISC",
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint .",
-    "jest": "jest",
-    "jest:dev": "jest --watchAll",
-    "test": "eslint . && jest"
+    "test": "jest",
+    "test:dev": "jest --watchAll"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

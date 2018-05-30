@@ -1,4 +1,4 @@
-# hast-util-from-dom
+# hast-util-from-dom [![Build Status][travis-badge]][travis]
 
 Transform a DOM tree to [HAST][]
 
@@ -23,7 +23,7 @@ This utility is similar to [`hast-util-from-parse5`][hast-util-from-parse5], but
 Say we have the following file, `example.html`:
 
 ```html
-<!doctype html><title>Hello!</title><h1 id="world">World!<!--after--><script src="example.js"></script>
+<!doctype html><title>Hello!</title><h1 id="world">World!<!--after--><script src="example.js" charset="UTF-8"></script>
 ```
 
 Suppose `example.js` is a bundled version of something like this:
@@ -34,7 +34,7 @@ import fromDOM from 'hast-util-from-dom';
 
 const hast = fromDOM(document.documentElement.parentNode);
 
-console.log(inspect(hast));
+console.log(inspect.noColor(hast));
 ```
 
 Viewing `example.html` should yield the following in the console:
@@ -43,14 +43,14 @@ Viewing `example.html` should yield the following in the console:
 root[2]
 ├─ doctype [name="html"]
 └─ element[2] [tagName="html"]
-    ├─ element[1] [tagName="head"]
-    │  └─ element[1] [tagName="title"]
-    │     └─ text: "Hello!"
-    └─ element[1] [tagName="body"]
+   ├─ element[1] [tagName="head"]
+   │  └─ element[1] [tagName="title"]
+   │     └─ text: "Hello!"
+   └─ element[1] [tagName="body"]
       └─ element[3] [tagName="h1"][properties={"id":"world"}]
-          ├─ text: "World!"
-          ├─ comment: "after"
-          └─ element[0] [tagName="script"][properties={"src":"example.js"}]
+         ├─ text: "World!"
+         ├─ comment: "after"
+         └─ element[0] [tagName="script"][properties={"src":"example.js","charSet":"UTF-8"}]
 ```
 
 ## API
@@ -66,6 +66,10 @@ This works in a similar way to the `parse5` version except that it works directl
 [ISC][license] © [Keith McKnight][author]
 
 <!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/kmck/hast-util-from-dom.svg
+
+[travis]: https://travis-ci.org/kmck/hast-util-from-dom
 
 [yarn]: https://yarnpkg.com/lang/en/docs/install
 
