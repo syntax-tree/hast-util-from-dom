@@ -10,7 +10,7 @@ export default {
   plugins: [
     babel({
       presets: [
-        ['env', { targets: { browsers: '>0.25%' }, modules: false }],
+        ['env', { modules: false }],
       ],
       babelrc: false,
     }),
