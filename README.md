@@ -18,7 +18,7 @@ npm install hast-util-from-dom
 
 ## Usage
 
-This utility is similar to [`hast-util-from-parse5`][hast-util-from-parse5], but is intended for browser user and therefore relies on the native DOM API instead of an external parsing library.
+This utility is similar to [`hast-util-from-parse5`][hast-util-from-parse5], but is intended for browser use and therefore relies on the native DOM API instead of an external parsing library.
 
 Say we have the following file, `example.html`:
 

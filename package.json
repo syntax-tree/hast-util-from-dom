@@ -1,6 +1,6 @@
 {
   "name": "hast-util-from-dom",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Transform a DOM tree to HAST",
   "main": "dist/hast-util-from-dom.js",
   "module": "dist/hast-util-from-dom.mjs",
