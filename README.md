@@ -37,7 +37,7 @@ const hast = fromDOM(document.documentElement.parentNode);
 console.log(inspect.noColor(hast));
 ```
 
-Viewing `example.html` should yield the following in the console:
+Viewing `example.html` in a browser should yield the following in the console:
 
 ```text
 root[2]
