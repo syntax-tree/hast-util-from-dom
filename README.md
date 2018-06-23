@@ -93,8 +93,6 @@ repository, organisation, or community you agree to abide by its terms.
 
 [node]: https://github.com/syntax-tree/hast#ast
 
-[vfile]: https://github.com/vfile/vfile
-
 [contributing]: https://github.com/syntax-tree/hast/blob/master/contributing.md
 
 [coc]: https://github.com/syntax-tree/hast/blob/master/code-of-conduct.md
