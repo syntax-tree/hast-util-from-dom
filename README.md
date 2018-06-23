@@ -61,6 +61,14 @@ Transform a DOM `Node` to a [HAST Node][node].
 
 This works in a similar way to the `parse5` version except that it works directly from the DOM rather than a string of HTML. Consequently, it does not maintain location infomation.
 
+## Contribute
+
+See [`contributing.md` in `syntax-tree/hast`][contributing] for ways to get
+started.
+
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
+
 ## License
 
 [ISC][license] © [Keith McKnight][author]
@@ -86,3 +94,7 @@ This works in a similar way to the `parse5` version except that it works directl
 [node]: https://github.com/syntax-tree/hast#ast
 
 [vfile]: https://github.com/vfile/vfile
+
+[contributing]: https://github.com/syntax-tree/hast/blob/master/contributing.md
+
+[coc]: https://github.com/syntax-tree/hast/blob/master/code-of-conduct.md
