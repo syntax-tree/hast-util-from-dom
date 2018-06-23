@@ -67,9 +67,9 @@ This works in a similar way to the `parse5` version except that it works directl
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/kmck/hast-util-from-dom.svg
+[travis-badge]: https://img.shields.io/travis/syntax-tree/hast-util-from-dom.svg
 
-[travis]: https://travis-ci.org/kmck/hast-util-from-dom
+[travis]: https://travis-ci.org/syntax-tree/hast-util-from-dom
 
 [yarn]: https://yarnpkg.com/lang/en/docs/install
 
