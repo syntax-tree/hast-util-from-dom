@@ -1,17 +1,31 @@
 {
   "name": "hast-util-from-dom",
   "version": "1.0.1",
-  "description": "Transform a DOM tree to HAST",
+  "description": "hast utility to create a tree fromthe DOM",
+  "license": "ISC",
+  "keywords": [
+    "unist",
+    "hast",
+    "util",
+    "utility",
+    "rehype",
+    "dom",
+    "html"
+  ],
+  "repository": "syntax-tree/hast-util-from-dom",
+  "bugs": "https://github.com/syntax-tree/hast-util-from-dom/issues",
+  "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
+  "contributors": [
+    "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
   "main": "dist/hast-util-from-dom.js",
   "module": "dist/hast-util-from-dom.mjs",
-  "repository": "https://github.com/syntax-tree/hast-util-from-dom",
-  "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
-  "license": "ISC",
-  "scripts": {
-    "build": "rollup -c",
-    "lint": "eslint .",
-    "test": "jest",
-    "test:dev": "jest --watchAll"
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {
+    "hastscript": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -26,10 +40,10 @@
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.1"
   },
-  "dependencies": {
-    "hastscript": "^5.0.0"
-  },
-  "files": [
-    "dist"
-  ]
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint .",
+    "test": "jest",
+    "test:dev": "jest --watchAll"
+  }
 }
