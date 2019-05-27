@@ -38,12 +38,14 @@
     "eslint-plugin-import": "^2.0.0",
     "glob": "^7.0.0",
     "jest-cli": "^24.0.0",
+    "remark-cli": "^6.0.1",
+    "remark-preset-wooorm": "^5.0.0",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.1"
   },
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint .",
+    "lint": "remark . -qfo && eslint .",
     "test": "jest",
     "test:dev": "jest --watchAll"
   },
@@ -60,5 +62,10 @@
         "statements": 100
       }
     }
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
