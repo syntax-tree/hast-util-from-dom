@@ -73,6 +73,17 @@ This works in a similar way to the [`parse5`][hast-util-from-parse5] version
 except that it works directly from the DOM rather than a string of HTML.
 Consequently, it does not maintain [positional info][positional-information].
 
+## Related
+
+*   [`hast-util-from-parse5`][hast-util-from-parse5]
+    — Create a hast tree from Parse5’s AST
+*   [`hast-util-sanitize`](https://github.com/syntax-tree/hast-util-sanitize)
+    — Sanitize hast nodes
+*   [`hast-util-to-html`](https://github.com/syntax-tree/hast-util-to-html)
+    — Create an HTML string
+*   [`hast-util-to-dom`](https://github.com/syntax-tree/hast-util-to-dom)
+    — Create a DOM tree from a hast tree
+
 ## Contribute
 
 See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
