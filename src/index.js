@@ -1,21 +1,16 @@
 import h from 'hastscript';
 
 const ELEMENT_NODE = 1;
-// const ATTRIBUTE_NODE = 2;
 const TEXT_NODE = 3;
-// const CDATA_SECTION_NODE = 4;
-// const ENTITY_REFERENCE_NODE = 5;
-// const ENTITY_NODE = 6;
-// const PROCESSING_INSTRUCTION_NODE = 7;
 const COMMENT_NODE = 8;
 const DOCUMENT_NODE = 9;
 const DOCUMENT_TYPE_NODE = 10;
 const DOCUMENT_FRAGMENT_NODE = 11;
-// const NOTATION_NODE = 12;
 
 function transform(el) {
   const children = [];
   const length = el.childNodes ? el.childNodes.length : 0;
+
   for (let i = 0; i < length; i += 1) {
     children.push(transform(el.childNodes[i]));
   }
@@ -52,16 +47,12 @@ function transform(el) {
   }
 }
 
-/**
- * Transform a document
- */
+// Transform a document.
 function root(el, children) {
   return { type: 'root', children };
 }
 
-/**
- * Transform a DOCTYPE
- */
+// Transform a doctype.
 function doctype(el) {
   return {
     type: 'doctype',
@@ -71,23 +62,17 @@ function doctype(el) {
   };
 }
 
-/**
- * Transform text node
- */
+// Transform text.
 function text(el) {
   return { type: 'text', value: el.nodeValue };
 }
 
-/**
- * Transform a comment node
- */
+// Transform a comment.
 function comment(el) {
   return { type: 'comment', value: el.data };
 }
 
-/**
- * Transform an element
- */
+// Transform an element.
 function element(el, children) {
   const tagName = el.tagName.toLowerCase();
   const props = {};

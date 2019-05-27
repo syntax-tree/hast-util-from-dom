@@ -4,28 +4,11 @@ import glob from 'glob';
 
 import fromDOM from './index';
 
-function createFragmentFromHtml(htmlString) {
-  const fragment = document.createDocumentFragment();
-  const tempEl = document.createElement('body');
-  tempEl.innerHTML = htmlString;
-  let child = tempEl.firstChild;
-  while (child) {
-    fragment.appendChild(child);
-    child = tempEl.firstChild;
-  }
-  return fragment;
-}
-
-function createDocumentFromHtml(htmlString) {
-  const parser = new DOMParser();
-  return parser.parseFromString(htmlString, 'text/html');
-}
-
 describe('hast-util-from-dom', () => {
   it('should transform a complete document', () => {
-    const fixtureHtml = '<title>Hello!</title><h1>World!';
-    const parsedActual = fromDOM(createDocumentFromHtml(fixtureHtml));
-    const parsedExpected = {
+    const actual = fromDOM(doc('<title>Hello!</title><h1>World!'));
+
+    expect(actual).toEqual({
       type: 'root',
       children: [{
         type: 'element',
@@ -58,14 +41,13 @@ describe('hast-util-from-dom', () => {
           },
         ],
       }],
-    };
-    expect(parsedActual).toEqual(parsedExpected);
+    });
   });
 
   it('should transform a fragment', () => {
-    const fixtureHtml = '<title>Hello!</title><h1>World!';
-    const parsedActual = fromDOM(createFragmentFromHtml(fixtureHtml));
-    const parsedExpected = {
+    const actual = fromDOM(fragment('<title>Hello!</title><h1>World!'));
+
+    expect(actual).toEqual({
       type: 'root',
       children: [
         {
@@ -81,30 +63,53 @@ describe('hast-util-from-dom', () => {
           children: [{ type: 'text', value: 'World!' }],
         },
       ],
-    };
-    expect(parsedActual).toEqual(parsedExpected);
+    });
   });
 });
 
 describe('fixtures', () => {
-  const FIXTURES_PATH = path.join(__dirname, '__fixtures__');
-  const fixturePaths = glob.sync(path.join(FIXTURES_PATH, '**/*/'));
+  const root = path.join(__dirname, '__fixtures__');
+  const fixturePaths = glob.sync(path.join(root, '**/*/'));
+
   fixturePaths.forEach((fixturePath) => {
-    const fixture = path.relative(FIXTURES_PATH, fixturePath);
-    const fixtureInput = path.join(fixturePath, 'index.html');
-    const fixtureOutput = path.join(fixturePath, 'index.json');
+    const fixture = path.relative(root, fixturePath);
+    const input = path.join(fixturePath, 'index.html');
+    const output = path.join(fixturePath, 'index.json');
 
     test(fixture, () => {
-      const fixtureHtml = fs.readFileSync(fixtureInput);
-      const parsedActual = fromDOM(createDocumentFromHtml(fixtureHtml));
+      const fixtureHtml = fs.readFileSync(input);
+      const actual = fromDOM(doc(fixtureHtml));
       let parsedExpected;
+
       try {
-        parsedExpected = JSON.parse(fs.readFileSync(fixtureOutput));
+        parsedExpected = JSON.parse(fs.readFileSync(output));
       } catch (e) {
-        fs.writeFileSync(fixtureOutput, JSON.stringify(parsedActual, null, 2));
+        fs.writeFileSync(output, JSON.stringify(actual, null, 2));
         return;
       }
-      expect(parsedActual).toEqual(parsedExpected);
+
+      expect(actual).toEqual(parsedExpected);
     });
   });
 });
+
+function fragment(htmlString) {
+  const node = document.createDocumentFragment();
+  const tempEl = document.createElement('body');
+
+  tempEl.innerHTML = htmlString;
+
+  let child = tempEl.firstChild;
+
+  while (child) {
+    node.appendChild(child);
+    child = tempEl.firstChild;
+  }
+
+  return node;
+}
+
+function doc(htmlString) {
+  const parser = new DOMParser();
+  return parser.parseFromString(htmlString, 'text/html');
+}
