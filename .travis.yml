@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - lts/* # latest long term support release
-  - stable # latest stable release
+  - lts/dubnium
+  - node
 script:
   - yarn test
   - yarn lint
