@@ -1,4 +1,6 @@
-import h from 'hastscript';
+import ns from 'web-namespaces';
+import h from 'hastscript/html';
+import s from 'hastscript/svg';
 
 const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
@@ -7,95 +9,90 @@ const DOCUMENT_NODE = 9;
 const DOCUMENT_TYPE_NODE = 10;
 const DOCUMENT_FRAGMENT_NODE = 11;
 
-function transform(el) {
-  const children = [];
-  const length = el.childNodes ? el.childNodes.length : 0;
+function transform(value) {
+  const node = value || {};
 
-  for (let i = 0; i < length; i += 1) {
-    children.push(transform(el.childNodes[i]));
-  }
-
-  switch (el.nodeType) {
+  switch (node.nodeType) {
+    case ELEMENT_NODE:
+      return element(node);
     case DOCUMENT_NODE:
     case DOCUMENT_FRAGMENT_NODE:
-      return root(el, children);
+      return root(node);
     case TEXT_NODE:
-      return text(el, children);
+      return text(node);
     case COMMENT_NODE:
-      return comment(el, children);
+      return comment(node);
     case DOCUMENT_TYPE_NODE:
-      return doctype(el, children);
-    case ELEMENT_NODE:
-      return element(el, children);
+      return doctype(node);
     default:
-      break;
-  }
-
-  switch (el.nodeName) {
-    case '#document':
-    case '#document-fragment':
-      return root(el, children);
-    case '#text':
-      return text(el, children);
-    case '#comment':
-      return comment(el, children);
-    case 'html':
-    case '#documentType':
-      return doctype(el, children);
-    default:
-      return element(el, children);
+      return null;
   }
 }
 
 // Transform a document.
-function root(el, children) {
-  return { type: 'root', children };
+function root(node) {
+  return { type: 'root', children: all(node) };
 }
 
 // Transform a doctype.
-function doctype(el) {
+function doctype(node) {
   return {
     type: 'doctype',
-    name: el.name || '',
-    public: el.publicId || null,
-    system: el.systemId || null,
+    name: node.name || '',
+    public: node.publicId || null,
+    system: node.systemId || null,
   };
 }
 
 // Transform text.
-function text(el) {
-  return { type: 'text', value: el.nodeValue };
+function text(node) {
+  return { type: 'text', value: node.nodeValue };
 }
 
 // Transform a comment.
-function comment(el) {
-  return { type: 'comment', value: el.data };
+function comment(node) {
+  return { type: 'comment', value: node.nodeValue };
 }
 
 // Transform an element.
-function element(el, children) {
-  const tagName = el.tagName.toLowerCase();
+function element(node) {
+  const space = node.namespaceURI;
+  const fn = space === ns.svg ? s : h;
+  const tagName = space === ns.html ? node.tagName.toLowerCase() : node.tagName;
+  const content = space === ns.html && tagName === 'template' ? node.content : node;
+  const attributes = node.getAttributeNames();
+  const { length } = attributes;
   const props = {};
-  const attrs = typeof el.getAttributeNames === 'function'
-    ? el.getAttributeNames()
-    : [];
-  const { length } = attrs;
+  let index = 0;
 
-  for (let i = 0; i < length; i += 1) {
-    const key = attrs[i];
-    const value = el.getAttribute(key);
-    props[key] = value;
+  while (index < length) {
+    const key = attributes[index];
+    props[key] = node.getAttribute(key);
+    index += 1;
   }
 
-  const node = h(tagName, props, children);
-
-  if (tagName === 'template' && 'content' in el) {
-    node.content = transform(el.content);
-  }
-
-  return node;
+  return fn(tagName, props, all(content));
 }
 
-export default function fromDOM(el) {
-  return transform(el);
+function all(node) {
+  const nodes = node.childNodes;
+  const { length } = nodes;
+  const children = [];
+  let index = 0;
+
+  while (index < length) {
+    const child = transform(nodes[index]);
+
+    if (child !== null) {
+      children.push(child);
+    }
+
+    index += 1;
+  }
+
+  return children;
+}
+
+export default function fromDOM(node) {
+  return transform(node) || { type: 'root', children: [] };
 }

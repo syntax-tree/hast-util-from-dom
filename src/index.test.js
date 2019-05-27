@@ -65,6 +65,48 @@ describe('hast-util-from-dom', () => {
       ],
     });
   });
+
+  it('should support an empty fragment', () => {
+    const actual = fromDOM(document.createDocumentFragment());
+
+    expect(actual).toEqual({ type: 'root', children: [] });
+  });
+
+  it('should support a comment', () => {
+    const actual = fromDOM(document.createComment('alpha'));
+
+    expect(actual).toEqual({ type: 'comment', value: 'alpha' });
+  });
+
+  it('should support a text', () => {
+    const actual = fromDOM(document.createTextNode('bravo'));
+
+    expect(actual).toEqual({ type: 'text', value: 'bravo' });
+  });
+
+  it('should handle CDATA', () => {
+    const xmlDoc = new DOMParser().parseFromString('<xml></xml>', 'application/xml');
+    const actual = fromDOM(xmlDoc.createCDATASection('charlie'));
+
+    expect(actual).toEqual({ type: 'root', children: [] });
+  });
+
+  it('should handle CDATA in HTML', () => {
+    const xmlDoc = new DOMParser().parseFromString('<xml></xml>', 'application/xml');
+    const frag = document.createDocumentFragment();
+
+    frag.appendChild(xmlDoc.createCDATASection('charlie'));
+
+    const actual = fromDOM(frag);
+
+    expect(actual).toEqual({ type: 'root', children: [] });
+  });
+
+  it('should handle a missing DOM tree', () => {
+    const actual = fromDOM();
+
+    expect(actual).toEqual({ type: 'root', children: [] });
+  });
 });
 
 describe('fixtures', () => {
