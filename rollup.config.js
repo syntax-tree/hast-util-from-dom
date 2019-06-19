@@ -15,5 +15,9 @@ export default {
       babelrc: false,
     }),
   ],
-  external: ['hastscript'],
+  external: [
+    'hastscript/html',
+    'hastscript/svg',
+    'web-namespaces',
+  ],
 };
