@@ -73,6 +73,12 @@ This works in a similar way to the [`parse5`][hast-util-from-parse5] version
 except that it works directly from the DOM rather than a string of HTML.
 Consequently, it does not maintain [positional info][positional-information].
 
+## Security
+
+Use of `hast-util-from-dom` can open you up to a
+[cross-site scripting (XSS)][xss] attack if the DOM is unsafe.
+Use [`hast-util-santize`][sanitize] to make the hast tree safe.
+
 ## Related
 
 *   [`hast-util-from-parse5`][hast-util-from-parse5]
@@ -147,3 +153,7 @@ abide by its terms.
 [hast]: https://github.com/syntax-tree/hast
 
 [hast-util-from-parse5]: https://github.com/syntax-tree/hast-util-from-parse5
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[sanitize]: https://github.com/syntax-tree/hast-util-sanitize
