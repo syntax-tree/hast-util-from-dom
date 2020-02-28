@@ -14,6 +14,10 @@
   ],
   "repository": "syntax-tree/hast-util-from-dom",
   "bugs": "https://github.com/syntax-tree/hast-util-from-dom/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
   "author": "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
   "contributors": [
     "Keith McKnight <keith@mcknig.ht> (https://keith.mcknig.ht)",
