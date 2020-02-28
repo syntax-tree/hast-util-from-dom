@@ -1,6 +1,6 @@
 {
   "name": "hast-util-from-dom",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "hast utility to create a tree from the DOM",
   "license": "ISC",
   "keywords": [
