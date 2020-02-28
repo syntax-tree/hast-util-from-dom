@@ -37,16 +37,16 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-eslint": "^10.0.0",
-    "babel-jest": "^24.0.0",
-    "eslint": "^5.0.0",
+    "babel-jest": "^25.0.0",
+    "eslint": "^6.0.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.0.0",
     "glob": "^7.0.0",
-    "jest-cli": "^24.0.0",
-    "remark-cli": "^6.0.1",
-    "remark-preset-wooorm": "^5.0.0",
+    "jest-cli": "^25.0.0",
+    "remark-cli": "^7.0.0",
+    "remark-preset-wooorm": "^6.0.0",
     "rollup": "^1.0.0",
-    "rollup-plugin-babel": "^4.0.1"
+    "rollup-plugin-babel": "^4.0.0"
   },
   "scripts": {
     "build": "rollup -c",
