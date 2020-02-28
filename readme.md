@@ -24,7 +24,7 @@ yarn add hast-util-from-dom
 npm install hast-util-from-dom
 ```
 
-## Usage
+## Use
 
 This utility is similar to [`hast-util-from-parse5`][hast-util-from-parse5], but
 is intended for browser use and therefore relies on the native DOM API instead
@@ -40,9 +40,9 @@ Suppose `example.js` is a bundled version of something like this:
 
 ```js
 import inspect from 'unist-util-inspect';
-import fromDOM from 'hast-util-from-dom';
+import fromDom from 'hast-util-from-dom';
 
-const hast = fromDOM(document);
+const hast = fromDom(document);
 
 console.log(inspect.noColor(hast));
 ```
@@ -65,7 +65,7 @@ root[2]
 
 ## API
 
-### `fromDOM(node)`
+### `fromDom(node)`
 
 Transform a DOM tree to a [**hast**][hast] [*tree*][tree].
 
@@ -96,8 +96,8 @@ See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
 started.
 See [`support.md`][support] for ways to get help.
 
-This project has a [Code of Conduct][coc].
-By interacting with this repository, organisation, or community you agree to
+This project has a [code of conduct][coc].
+By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
 ## License
@@ -128,7 +128,7 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/syntax-tree
 
