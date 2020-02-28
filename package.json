@@ -6,6 +6,7 @@
   "keywords": [
     "unist",
     "hast",
+    "hast-util",
     "util",
     "utility",
     "rehype",
