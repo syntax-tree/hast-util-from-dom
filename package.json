@@ -30,7 +30,7 @@
     "dist/"
   ],
   "dependencies": {
-    "hastscript": "^5.0.0",
+    "hastscript": "^6.0.0",
     "web-namespaces": "^1.0.0"
   },
   "devDependencies": {
