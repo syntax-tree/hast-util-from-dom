@@ -128,9 +128,9 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
-[chat]: https://spectrum.chat/unified/syntax-tree
+[chat]: https://github.com/syntax-tree/unist/discussions
 
 [yarn]: https://yarnpkg.com/lang/en/docs/install
 
