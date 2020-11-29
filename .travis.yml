@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - lts/dubnium
-  - node
-script:
-  - yarn test
-  - yarn lint
-cache: yarn
-after_script: bash <(curl -s https://codecov.io/bash)
