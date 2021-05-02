@@ -37,23 +37,32 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@rollup/plugin-babel": "^5.0.0",
-    "babel-eslint": "^10.0.0",
     "babel-jest": "^26.0.0",
-    "eslint": "^7.0.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.0.0",
     "glob": "^7.0.0",
     "jest-cli": "^26.0.0",
+    "prettier": "^2.0.0",
     "remark-cli": "^9.0.0",
     "remark-preset-wooorm": "^8.0.0",
-    "rollup": "^2.0.0"
+    "rollup": "^2.0.0",
+    "xo": "^0.39.0"
   },
   "scripts": {
     "build": "rollup -c",
-    "format": "remark . -qfo && eslint . --fix",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "test:api": "jest",
     "test:dev": "jest --watchAll",
     "test": "yarn build && yarn format && yarn test:api"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true
   },
   "jest": {
     "collectCoverage": true,

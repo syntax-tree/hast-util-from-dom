@@ -85,9 +85,7 @@
                           "type": "element",
                           "tagName": "text",
                           "properties": {
-                            "systemLanguage": [
-                              "en"
-                            ]
+                            "systemLanguage": ["en"]
                           },
                           "children": [
                             {
