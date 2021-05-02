@@ -7,7 +7,7 @@ import glob from 'glob'
 import {JSDOM} from 'jsdom'
 import {fromDom} from '../index.js'
 
-globalThis.window = new JSDOM().window
+const window = new JSDOM().window
 globalThis.document = window.document
 
 test('hast-util-from-dom', (t) => {
@@ -116,6 +116,7 @@ test('hast-util-from-dom', (t) => {
   )
 
   t.deepEqual(
+    // @ts-ignore runtime.
     fromDom(),
     {type: 'root', children: []},
     'should handle a missing DOM tree'
@@ -135,15 +136,16 @@ test('fixtures', (t) => {
 
   t.end()
 
-  function each(fixturePath) {
+  function each(/** @type {string} */ fixturePath) {
     const input = path.join(fixturePath, 'index.html')
     const output = path.join(fixturePath, 'index.json')
-    const fixtureHtml = fs.readFileSync(input)
+    const fixtureHtml = String(fs.readFileSync(input))
     const actual = fromDom(doc(fixtureHtml))
+    /** @type {unknown} */
     let parsedExpected
 
     try {
-      parsedExpected = JSON.parse(fs.readFileSync(output))
+      parsedExpected = JSON.parse(String(fs.readFileSync(output)))
     } catch {
       fs.writeFileSync(output, JSON.stringify(actual, null, 2))
       return
@@ -153,7 +155,7 @@ test('fixtures', (t) => {
   }
 })
 
-function fragment(htmlString) {
+function fragment(/** @type {string} */ htmlString) {
   const node = document.createDocumentFragment()
   const temporary = document.createElement('body')
 
@@ -170,6 +172,6 @@ function fragment(htmlString) {
   return node
 }
 
-function doc(htmlString) {
+function doc(/** @type {string} */ htmlString) {
   return new JSDOM(htmlString).window.document
 }
