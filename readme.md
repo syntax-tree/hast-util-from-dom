@@ -12,11 +12,8 @@
 
 ## Install
 
-[yarn][]:
-
-```sh
-yarn add hast-util-from-dom
-```
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
 
 [npm][]:
 
@@ -39,12 +36,12 @@ Say we have the following file, `example.html`:
 Suppose `example.js` is a bundled version of something like this:
 
 ```js
-import inspect from 'unist-util-inspect';
-import fromDom from 'hast-util-from-dom';
+import {inspect} from 'unist-util-inspect'
+import {fromDom} from 'hast-util-from-dom'
 
-const hast = fromDom(document);
+const hast = fromDom(document)
 
-console.log(inspect.noColor(hast));
+console.log(inspect.noColor(hast))
 ```
 
 Viewing `example.html` in a browser should yield the following in the console:
@@ -64,6 +61,9 @@ root[2]
 ```
 
 ## API
+
+This package exports the following identifiers: `fromDom`.
+There is no default export.
 
 ### `fromDom(node)`
 
@@ -131,8 +131,6 @@ abide by its terms.
 [chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [chat]: https://github.com/syntax-tree/unist/discussions
-
-[yarn]: https://yarnpkg.com/lang/en/docs/install
 
 [npm]: https://docs.npmjs.com/cli/install
 
