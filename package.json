@@ -51,7 +51,7 @@
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "test:api": "jest",
     "test:dev": "jest --watchAll",
-    "test": "yarn build && yarn format && yarn test:api"
+    "test": "npm run build && npm run format && npm run test:api"
   },
   "prettier": {
     "tabWidth": 2,
