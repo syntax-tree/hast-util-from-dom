@@ -2,10 +2,7 @@
   "type": "root",
   "children": [
     {
-      "type": "doctype",
-      "name": "html",
-      "public": null,
-      "system": "http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd"
+      "type": "doctype"
     },
     {
       "type": "element",

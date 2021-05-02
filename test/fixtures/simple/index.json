@@ -2,10 +2,7 @@
   "type": "root",
   "children": [
     {
-      "type": "doctype",
-      "name": "html",
-      "public": null,
-      "system": null
+      "type": "doctype"
     },
     {
       "type": "element",
