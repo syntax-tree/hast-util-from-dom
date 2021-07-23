@@ -116,10 +116,32 @@ test('hast-util-from-dom', (t) => {
   )
 
   t.deepEqual(
-    // @ts-ignore runtime.
+    // @ts-expect-error runtime.
     fromDom(),
     {type: 'root', children: []},
     'should handle a missing DOM tree'
+  )
+
+  t.deepEqual(
+    fromDom(document.createTextNode('')),
+    {type: 'text', value: ''},
+    'should support a text w/o value'
+  )
+
+  t.deepEqual(
+    fromDom(document.createComment('')),
+    {type: 'comment', value: ''},
+    'should support a comment w/o value'
+  )
+
+  const attribute = document.createAttribute('title')
+  const element = document.createElement('div')
+  element.setAttributeNode(attribute)
+
+  t.deepEqual(
+    fromDom(element),
+    {type: 'element', tagName: 'div', properties: {title: ''}, children: []},
+    'should support an attribute w/o value'
   )
 
   t.end()
