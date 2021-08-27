@@ -1,8 +1,8 @@
 /* eslint-env browser */
 
+import fs from 'node:fs'
+import path from 'node:path'
 import test from 'tape'
-import fs from 'fs'
-import path from 'path'
 import glob from 'glob'
 import {JSDOM} from 'jsdom'
 import {fromDom} from '../index.js'
