@@ -25,7 +25,6 @@
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "main": "index.js",
-  "module": "dist/hast-util-from-dom.mjs",
   "sideEffects": false,
   "type": "module",
   "types": "index.d.ts",
