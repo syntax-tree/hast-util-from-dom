@@ -73,6 +73,14 @@ This works in a similar way to the [`parse5`][hast-util-from-parse5] version
 except that it works directly from the DOM rather than a string of HTML.
 Consequently, it does not maintain [positional info][positional-information].
 
+##### `options`
+
+###### `options.afterTransform`
+
+Function called when a DOM node is transformed into a hast node (`Function?`).
+Given the DOM node that was handled as the first parameter and the
+corresponding hast node as the second parameter.
+
 ## Security
 
 Use of `hast-util-from-dom` can open you up to a
