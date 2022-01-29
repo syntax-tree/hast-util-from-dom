@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('../lib/index.js').HastNode} HastNode
+ */
+
 /* eslint-env browser */
 
 import fs from 'node:fs'
@@ -142,6 +146,40 @@ test('hast-util-from-dom', (t) => {
     fromDom(element),
     {type: 'element', tagName: 'div', properties: {title: ''}, children: []},
     'should support an attribute w/o value'
+  )
+
+  const heading = document.createElement('h2')
+  const text = document.createTextNode('Hello')
+  heading.append(text)
+
+  t.deepEqual(
+    (() => {
+      /** @type {Array<[Node, HastNode|undefined]>} */
+      const calls = []
+      fromDom(heading, {
+        /**
+         * @param {Node} node
+         * @param {HastNode|undefined} transformed
+         */
+        afterTransform: (node, transformed) => {
+          calls.push([node, transformed])
+        }
+      })
+      return calls
+    })(),
+    [
+      [text, {type: 'text', value: 'Hello'}],
+      [
+        heading,
+        {
+          type: 'element',
+          tagName: 'h2',
+          properties: {},
+          children: [{type: 'text', value: 'Hello'}]
+        }
+      ]
+    ],
+    'should invoke afterTransform'
   )
 
   t.end()
