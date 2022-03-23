@@ -8,105 +8,154 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**hast**][hast] utility to transform from a DOM tree.
+[hast][] utility to transform from a [DOM][] tree.
+
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`fromDom(node)`](#fromdomnode)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Contribute](#contribute)
+*   [Related](#related)
+*   [License](#license)
+
+## What is this?
+
+This package is a utility that takes a DOM tree (from the actual DOM or from
+things like [`jsdom`][jsdom]) as input and turns it into a [hast][] (HTML)
+syntax tree.
+
+## When should I use this?
+
+You can use this project when you want to use hast in browsers.
+This package is very small, but it does so by:
+
+*   …not providing positional information
+*   …potentially yielding varying results in different (especially older)
+    browsers
+
+The hast utility [`hast-util-to-dom`][hast-util-to-dom] does the inverse of this
+utility.
+It turns hast into a DOM tree.
+
+The rehype plugin [`rehype-dom-parse`][rehype-dom-parse] wraps this utility to
+parse HTML with DOM APIs.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-dom
 ```
 
-## Use
-
-This utility is similar to [`hast-util-from-parse5`][hast-util-from-parse5], but
-is intended for browser use and therefore relies on the native DOM API instead
-of an external parsing library.
-
-Say we have the following file, `example.html`:
-
-```html
-<!doctype html><title>Hello!</title><h1 id="world">World!<!--after--><script src="example.js" charset="UTF-8"></script>
-```
-
-Suppose `example.js` is a bundled version of something like this:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {inspect} from 'unist-util-inspect'
-import {fromDom} from 'hast-util-from-dom'
-
-const hast = fromDom(document)
-
-console.log(inspect.noColor(hast))
+import {fromDom} from 'https://esm.sh/hast-util-from-dom@4'
 ```
 
-Viewing `example.html` in a browser should yield the following in the console:
+In browsers with [`esm.sh`][esmsh]:
 
-```text
-root[2]
-├─ doctype [name="html"]
-└─ element[2] [tagName="html"]
-   ├─ element[1] [tagName="head"]
-   │  └─ element[1] [tagName="title"]
-   │     └─ text: "Hello!"
-   └─ element[1] [tagName="body"]
-      └─ element[3] [tagName="h1"][properties={"id":"world"}]
-         ├─ text: "World!"
-         ├─ comment: "after"
-         └─ element[0] [tagName="script"][properties={"src":"example.js","charSet":"UTF-8"}]
+```html
+<script type="module">
+  import {fromDom} from 'https://esm.sh/hast-util-from-dom@4?bundle'
+</script>
+```
+
+## Use
+
+Say our page `example.html` looks as follows:
+
+```html
+<!doctype html>
+<title>Example</title>
+<body>
+  <main>
+    <h1>Hi</h1>
+    <p><em>Hello</em>, world!</p>
+  </main>
+  <script type="module">
+    import {fromDom} from 'https://esm.sh/hast-util-from-dom@4?bundle'
+
+    const hast = fromDom(document.querySelector('main'))
+
+    console.log(hast)
+  </script>
+```
+
+Now running `open example.html` prints the following to the console:
+
+```js
+{type: "element", tagName: "main", properties: {}, children: Array}
 ```
 
 ## API
 
-This package exports the following identifiers: `fromDom`.
+This package exports the identifier `fromDom`.
 There is no default export.
 
 ### `fromDom(node)`
 
-Transform a DOM tree to a [**hast**][hast] [*tree*][tree].
+Turn a DOM tree into a hast tree.
 
-This works in a similar way to the [`parse5`][hast-util-from-parse5] version
-except that it works directly from the DOM rather than a string of HTML.
-Consequently, it does not maintain [positional info][positional-information].
+##### options
 
-##### `options`
+Configuration (optional).
 
 ###### `options.afterTransform`
 
-Function called after a DOM node is transformed into a hast node (`Function?`).
-Given the DOM node that was handled as the first parameter and the
-corresponding hast node as the second parameter.
+Called when a DOM node was transformed into a hast node
+(`(Node, HastNode) => void?`).
+
+##### Returns
+
+[`HastNode`][hast-node].
+
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports the additional type `Options`.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
 
-Use of `hast-util-from-dom` can open you up to a
-[cross-site scripting (XSS)][xss] attack if the DOM is unsafe.
-Use [`hast-util-santize`][sanitize] to make the hast tree safe.
+Use of `hast-util-from-dom` itself is safe but see other utilities for more
+information on potential security problems.
+
+## Contribute
+
+See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
+ways to get started.
+See [`support.md`][support] for ways to get help.
+
+This project has a [code of conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## Related
 
 *   [`hast-util-from-parse5`][hast-util-from-parse5]
-    — Create a hast tree from Parse5’s AST
+    — create hast from Parse5’s AST
 *   [`hast-util-sanitize`](https://github.com/syntax-tree/hast-util-sanitize)
-    — Sanitize hast nodes
+    — sanitize hast nodes
 *   [`hast-util-to-html`](https://github.com/syntax-tree/hast-util-to-html)
-    — Create an HTML string
+    — serialize hast as HTML
 *   [`hast-util-to-dom`](https://github.com/syntax-tree/hast-util-to-dom)
-    — Create a DOM tree from a hast tree
-
-## Contribute
-
-See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
-started.
-See [`support.md`][support] for ways to get help.
-
-This project has a [code of conduct][coc].
-By interacting with this repository, organization, or community you agree to
-abide by its terms.
+    — create DOM trees from hast
 
 ## License
 
@@ -142,24 +191,34 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
 [license]: license
 
 [author]: https://keith.mcknig.ht
 
-[contributing]: https://github.com/syntax-tree/.github/blob/HEAD/contributing.md
+[health]: https://github.com/syntax-tree/.github
 
-[support]: https://github.com/syntax-tree/.github/blob/HEAD/support.md
+[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
 
-[coc]: https://github.com/syntax-tree/.github/blob/HEAD/code-of-conduct.md
+[support]: https://github.com/syntax-tree/.github/blob/main/support.md
 
-[tree]: https://github.com/syntax-tree/unist#tree
-
-[positional-information]: https://github.com/syntax-tree/unist#positional-information
+[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
 
 [hast]: https://github.com/syntax-tree/hast
 
+[hast-node]: https://github.com/syntax-tree/hast#nodes
+
+[dom]: https://developer.mozilla.org/docs/Web/API/Document_Object_Model
+
 [hast-util-from-parse5]: https://github.com/syntax-tree/hast-util-from-parse5
 
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+[hast-util-to-dom]: https://github.com/syntax-tree/hast-util-to-dom
 
-[sanitize]: https://github.com/syntax-tree/hast-util-sanitize
+[rehype-dom-parse]: https://github.com/rehypejs/rehype-dom/tree/main/packages/rehype-dom-parse
+
+[jsdom]: https://github.com/jsdom/jsdom
