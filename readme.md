@@ -77,7 +77,7 @@ Consequently, it does not maintain [positional info][positional-information].
 
 ###### `options.afterTransform`
 
-Function called when a DOM node is transformed into a hast node (`Function?`).
+Function called after a DOM node is transformed into a hast node (`Function?`).
 Given the DOM node that was handled as the first parameter and the
 corresponding hast node as the second parameter.
 
