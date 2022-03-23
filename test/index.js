@@ -161,7 +161,7 @@ test('hast-util-from-dom', (t) => {
          * @param {Node} node
          * @param {HastNode|undefined} transformed
          */
-        afterTransform: (node, transformed) => {
+        afterTransform(node, transformed) {
           calls.push([node, transformed])
         }
       })
