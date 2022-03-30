@@ -17,7 +17,7 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`fromDom(node)`](#fromdomnode)
+    *   [`fromDom(node, options?)`](#fromdomnode-options)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Security](#security)
@@ -102,7 +102,7 @@ Now running `open example.html` prints the following to the console:
 This package exports the identifier `fromDom`.
 There is no default export.
 
-### `fromDom(node)`
+### `fromDom(node, options?)`
 
 Turn a DOM tree into a hast tree.
 
