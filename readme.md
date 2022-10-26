@@ -148,8 +148,8 @@ abide by its terms.
 
 ## Related
 
-*   [`hast-util-from-parse5`][hast-util-from-parse5]
-    — create hast from Parse5’s AST
+*   [`hast-util-from-html`][hast-util-from-html]
+    — parse hast from a string of HTML
 *   [`hast-util-sanitize`](https://github.com/syntax-tree/hast-util-sanitize)
     — sanitize hast nodes
 *   [`hast-util-to-html`](https://github.com/syntax-tree/hast-util-to-html)
@@ -215,7 +215,7 @@ abide by its terms.
 
 [dom]: https://developer.mozilla.org/docs/Web/API/Document_Object_Model
 
-[hast-util-from-parse5]: https://github.com/syntax-tree/hast-util-from-parse5
+[hast-util-from-html]: https://github.com/syntax-tree/hast-util-from-html
 
 [hast-util-to-dom]: https://github.com/syntax-tree/hast-util-to-dom
 
