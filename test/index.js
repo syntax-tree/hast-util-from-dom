@@ -10,11 +10,18 @@ import process from 'node:process'
 import test from 'node:test'
 import {JSDOM} from 'jsdom'
 import {fromDom} from '../index.js'
+import * as mod from '../index.js'
 
 const window = new JSDOM().window
 globalThis.document = window.document
 
-test('hast-util-from-dom', () => {
+test('fromDom', () => {
+  assert.deepEqual(
+    Object.keys(mod).sort(),
+    ['fromDom'],
+    'should expose the public api'
+  )
+
   assert.deepEqual(
     fromDom(doc('<title>Hello!</title><h1>World!')),
     {
