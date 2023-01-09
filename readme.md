@@ -17,7 +17,9 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`fromDom(node, options?)`](#fromdomnode-options)
+    *   [`fromDom(tree, options?)`](#fromdomtree-options)
+    *   [`AfterTransform`](#aftertransform)
+    *   [`Options`](#options)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Security](#security)
@@ -50,7 +52,7 @@ parse HTML with DOM APIs.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-dom
@@ -99,21 +101,47 @@ Now running `open example.html` prints the following to the console:
 
 ## API
 
-This package exports the identifier `fromDom`.
+This package exports the identifier [`fromDom`][fromdom].
 There is no default export.
 
-### `fromDom(node, options?)`
+### `fromDom(tree, options?)`
 
-Turn a DOM tree into a hast tree.
+Transform a DOM tree to a hast tree.
 
-##### options
+###### Parameters
 
-Configuration (optional).
+*   `tree` ([`DomNode`][dom-node])
+    — DOM tree to transform
+*   `options` ([`Options`][options], optional)
+    — configuration
 
-###### `options.afterTransform`
+###### Returns
 
-Called when a DOM node was transformed into a hast node
-(`(Node, HastNode) => void?`).
+Equivalent hast node ([`HastNode`][hast-node]).
+
+### `AfterTransform`
+
+Callback called when each node is transformed (TypeScript type).
+
+###### Parameters
+
+*   `domNode` ([`DomNode`][dom-node])
+    — DOM node that was handled
+*   `hastNode` ([`HastNode`][hast-node])
+    — corresponding hast node
+
+###### Returns
+
+Nothing.
+
+### `Options`
+
+Configuration (TypeScript type).
+
+##### Fields
+
+*   `afterTransform` ([`AfterTransform`][aftertransform], optional)
+    — callback called when each node is transformed
 
 ##### Returns
 
@@ -215,6 +243,8 @@ abide by its terms.
 
 [dom]: https://developer.mozilla.org/docs/Web/API/Document_Object_Model
 
+[dom-node]: https://developer.mozilla.org/docs/Web/API/Node
+
 [hast-util-from-html]: https://github.com/syntax-tree/hast-util-from-html
 
 [hast-util-to-dom]: https://github.com/syntax-tree/hast-util-to-dom
@@ -222,3 +252,9 @@ abide by its terms.
 [rehype-dom-parse]: https://github.com/rehypejs/rehype-dom/tree/main/packages/rehype-dom-parse
 
 [jsdom]: https://github.com/jsdom/jsdom
+
+[fromdom]: #fromdomtree-options
+
+[options]: #options
+
+[aftertransform]: #aftertransform
