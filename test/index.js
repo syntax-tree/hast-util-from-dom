@@ -10,21 +10,19 @@ import process from 'node:process'
 import test from 'node:test'
 import {JSDOM} from 'jsdom'
 import {fromDom} from '../index.js'
-import * as mod from '../index.js'
 
 const window = new JSDOM().window
 globalThis.document = window.document
 
-test('fromDom', () => {
-  assert.deepEqual(
-    Object.keys(mod).sort(),
-    ['fromDom'],
-    'should expose the public api'
-  )
+test('fromDom', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('../index.js')).sort(), [
+      'fromDom'
+    ])
+  })
 
-  assert.deepEqual(
-    fromDom(doc('<title>Hello!</title><h1>World!')),
-    {
+  await t.test('should transform a complete document', async function () {
+    assert.deepEqual(fromDom(doc('<title>Hello!</title><h1>World!')), {
       type: 'root',
       children: [
         {
@@ -61,13 +59,11 @@ test('fromDom', () => {
           ]
         }
       ]
-    },
-    'should transform a complete document'
-  )
+    })
+  })
 
-  assert.deepEqual(
-    fromDom(fragment('<title>Hello!</title><h1>World!')),
-    {
+  await t.test('should transform a fragment', async function () {
+    assert.deepEqual(fromDom(fragment('<title>Hello!</title><h1>World!')), {
       type: 'root',
       children: [
         {
@@ -83,98 +79,101 @@ test('fromDom', () => {
           children: [{type: 'text', value: 'World!'}]
         }
       ]
-    },
-    'should transform a fragment'
-  )
+    })
+  })
 
-  assert.deepEqual(
-    fromDom(document.createDocumentFragment()),
-    {type: 'root', children: []},
-    'should support an empty fragment'
-  )
+  await t.test('should support an empty fragment', async function () {
+    assert.deepEqual(fromDom(document.createDocumentFragment()), {
+      type: 'root',
+      children: []
+    })
+  })
 
-  assert.deepEqual(
-    fromDom(document.createComment('alpha')),
-    {type: 'comment', value: 'alpha'},
-    'should support a comment'
-  )
+  await t.test('should support a comment', async function () {
+    assert.deepEqual(fromDom(document.createComment('alpha')), {
+      type: 'comment',
+      value: 'alpha'
+    })
+  })
 
-  assert.deepEqual(
-    fromDom(document.createTextNode('bravo')),
-    {type: 'text', value: 'bravo'},
-    'should support a text'
-  )
+  await t.test('should support a text', async function () {
+    assert.deepEqual(fromDom(document.createTextNode('bravo')), {
+      type: 'text',
+      value: 'bravo'
+    })
+  })
 
-  const cdata = new JSDOM('<xml></xml>', {
-    contentType: 'application/xml'
-  }).window.document.createCDATASection('charlie')
+  await t.test('should handle CDATA', async function () {
+    const cdata = new JSDOM('<xml></xml>', {
+      contentType: 'application/xml'
+    }).window.document.createCDATASection('charlie')
 
-  assert.deepEqual(
-    fromDom(cdata),
-    {type: 'root', children: []},
-    'should handle CDATA'
-  )
+    assert.deepEqual(fromDom(cdata), {type: 'root', children: []})
+  })
 
-  const frag = document.createDocumentFragment()
+  await t.test('should handle CDATA in HTML', async function () {
+    const cdata = new JSDOM('<xml></xml>', {
+      contentType: 'application/xml'
+    }).window.document.createCDATASection('charlie')
+    const frag = document.createDocumentFragment()
 
-  // eslint-disable-next-line unicorn/prefer-dom-node-append
-  frag.appendChild(cdata)
+    // eslint-disable-next-line unicorn/prefer-dom-node-append
+    frag.appendChild(cdata)
 
-  assert.deepEqual(
-    fromDom(frag),
-    {type: 'root', children: []},
-    'should handle CDATA in HTML'
-  )
+    assert.deepEqual(fromDom(frag), {type: 'root', children: []})
+  })
 
-  assert.deepEqual(
-    // @ts-expect-error runtime.
-    fromDom(),
-    {type: 'root', children: []},
-    'should handle a missing DOM tree'
-  )
+  await t.test('should handle a missing DOM tree', async function () {
+    assert.deepEqual(
+      // To do: remove.
+      // @ts-expect-error runtime.
+      fromDom(),
+      {type: 'root', children: []}
+    )
+  })
 
-  assert.deepEqual(
-    fromDom(document.createTextNode('')),
-    {type: 'text', value: ''},
-    'should support a text w/o value'
-  )
+  await t.test('should support a text w/o value', async function () {
+    assert.deepEqual(fromDom(document.createTextNode('')), {
+      type: 'text',
+      value: ''
+    })
+  })
 
-  assert.deepEqual(
-    fromDom(document.createComment('')),
-    {type: 'comment', value: ''},
-    'should support a comment w/o value'
-  )
+  await t.test('should support a comment w/o value', async function () {
+    assert.deepEqual(fromDom(document.createComment('')), {
+      type: 'comment',
+      value: ''
+    })
+  })
 
-  const attribute = document.createAttribute('title')
-  const element = document.createElement('div')
-  element.setAttributeNode(attribute)
+  await t.test('should support an attribute w/o value', async function () {
+    const attribute = document.createAttribute('title')
+    const element = document.createElement('div')
+    element.setAttributeNode(attribute)
 
-  assert.deepEqual(
-    fromDom(element),
-    {type: 'element', tagName: 'div', properties: {title: ''}, children: []},
-    'should support an attribute w/o value'
-  )
+    assert.deepEqual(fromDom(element), {
+      type: 'element',
+      tagName: 'div',
+      properties: {title: ''},
+      children: []
+    })
+  })
 
-  const heading = document.createElement('h2')
-  const text = document.createTextNode('Hello')
-  heading.append(text)
+  await t.test('should call `afterTransform`', async function () {
+    const heading = document.createElement('h2')
+    const text = document.createTextNode('Hello')
+    heading.append(text)
 
-  assert.deepEqual(
-    (() => {
-      /** @type {Array<[Node, HastNodes|undefined]>} */
-      const calls = []
-      fromDom(heading, {
-        /**
-         * @param {Node} node
-         * @param {HastNodes|undefined} transformed
-         */
-        afterTransform(node, transformed) {
-          calls.push([node, transformed])
-        }
-      })
-      return calls
-    })(),
-    [
+    /** @type {Array<[unknown, unknown]>} */
+    const calls = []
+
+    fromDom(heading, {
+      afterTransform(node, transformed) {
+        calls.push([node, transformed])
+      }
+    })
+
+    assert.deepEqual(calls, [
       [text, {type: 'text', value: 'Hello'}],
       [
         heading,
@@ -185,12 +184,11 @@ test('fromDom', () => {
           children: [{type: 'text', value: 'Hello'}]
         }
       ]
-    ],
-    'should invoke afterTransform'
-  )
+    ])
+  })
 })
 
-test('fixtures', async () => {
+test('fixtures', async function (t) {
   const base = new URL('fixtures/', import.meta.url)
   const folders = await fs.readdir(base)
 
@@ -199,25 +197,27 @@ test('fixtures', async () => {
       continue
     }
 
-    const treeUrl = new URL(folder + '/index.json', base)
-    const fixtureUrl = new URL(folder + '/index.html', base)
-    const input = String(await fs.readFile(fixtureUrl))
-    const actual = fromDom(doc(input))
-    /** @type {HastNodes} */
-    let expected
+    await t.test(folder, async function () {
+      const treeUrl = new URL(folder + '/index.json', base)
+      const fixtureUrl = new URL(folder + '/index.html', base)
+      const input = String(await fs.readFile(fixtureUrl))
+      const actual = fromDom(doc(input))
+      /** @type {HastNodes} */
+      let expected
 
-    try {
-      if ('UPDATE' in process.env) {
-        throw new Error('Updating')
+      try {
+        if ('UPDATE' in process.env) {
+          throw new Error('Updating')
+        }
+
+        expected = JSON.parse(String(await fs.readFile(treeUrl)))
+      } catch {
+        await fs.writeFile(treeUrl, JSON.stringify(actual, undefined, 2))
+        return
       }
 
-      expected = JSON.parse(String(await fs.readFile(treeUrl)))
-    } catch {
-      await fs.writeFile(treeUrl, JSON.stringify(actual, null, 2))
-      continue
-    }
-
-    assert.deepEqual(actual, expected, folder)
+      assert.deepEqual(actual, expected, folder)
+    })
   }
 })
 
