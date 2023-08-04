@@ -123,15 +123,6 @@ test('fromDom', async function (t) {
     assert.deepEqual(fromDom(frag), {type: 'root', children: []})
   })
 
-  await t.test('should handle a missing DOM tree', async function () {
-    assert.deepEqual(
-      // To do: remove.
-      // @ts-expect-error runtime.
-      fromDom(),
-      {type: 'root', children: []}
-    )
-  })
-
   await t.test('should support a text w/o value', async function () {
     assert.deepEqual(fromDom(document.createTextNode('')), {
       type: 'text',
