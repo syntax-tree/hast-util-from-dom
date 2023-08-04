@@ -160,8 +160,8 @@ versions of Node.js.
 
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
-This means we try to keep the current release line, `hast-util-from-dom@^4`,
-compatible with Node.js 12.
+This means we try to keep the current release line, `hast-util-from-dom@^5`,
+compatible with Node.js 16.
 
 ## Security
 
