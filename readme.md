@@ -52,7 +52,7 @@ parse HTML with DOM APIs.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 14.14+ and 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-dom
@@ -101,7 +101,7 @@ Now running `open example.html` prints the following to the console:
 
 ## API
 
-This package exports the identifier [`fromDom`][fromdom].
+This package exports the identifier [`fromDom`][api-from-dom].
 There is no default export.
 
 ### `fromDom(tree, options?)`
@@ -112,7 +112,7 @@ Transform a DOM tree to a hast tree.
 
 *   `tree` ([`DomNode`][dom-node])
     — DOM tree to transform
-*   `options` ([`Options`][options], optional)
+*   `options` ([`Options`][api-options], optional)
     — configuration
 
 ###### Returns
@@ -140,7 +140,7 @@ Configuration (TypeScript type).
 
 ##### Fields
 
-*   `afterTransform` ([`AfterTransform`][aftertransform], optional)
+*   `afterTransform` ([`AfterTransform`][api-after-transform], optional)
     — callback called when each node is transformed
 
 ##### Returns
@@ -150,14 +150,18 @@ Configuration (TypeScript type).
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional type `Options`.
+It exports the additional types [`AfterTransform`][api-after-transform] and
+[`Options`][api-options].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `hast-util-from-dom@^4`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -203,9 +207,9 @@ abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/hast-util-from-dom
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-from-dom.svg
+[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=hast-util-from-dom
 
-[size]: https://bundlephobia.com/result?p=hast-util-from-dom
+[size]: https://bundlejs.com/?q=hast-util-from-dom
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -253,8 +257,8 @@ abide by its terms.
 
 [jsdom]: https://github.com/jsdom/jsdom
 
-[fromdom]: #fromdomtree-options
+[api-from-dom]: #fromdomtree-options
 
-[options]: #options
+[api-options]: #options
 
-[aftertransform]: #aftertransform
+[api-after-transform]: #aftertransform
