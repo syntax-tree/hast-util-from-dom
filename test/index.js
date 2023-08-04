@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../lib/index.js').HastNode} HastNode
+ * @typedef {import('../lib/index.js').HastNodes} HastNodes
  */
 
 /* eslint-env browser */
@@ -161,12 +161,12 @@ test('fromDom', () => {
 
   assert.deepEqual(
     (() => {
-      /** @type {Array<[Node, HastNode|undefined]>} */
+      /** @type {Array<[Node, HastNodes|undefined]>} */
       const calls = []
       fromDom(heading, {
         /**
          * @param {Node} node
-         * @param {HastNode|undefined} transformed
+         * @param {HastNodes|undefined} transformed
          */
         afterTransform(node, transformed) {
           calls.push([node, transformed])
@@ -203,7 +203,7 @@ test('fixtures', async () => {
     const fixtureUrl = new URL(folder + '/index.html', base)
     const input = String(await fs.readFile(fixtureUrl))
     const actual = fromDom(doc(input))
-    /** @type {HastNode} */
+    /** @type {HastNodes} */
     let expected
 
     try {
