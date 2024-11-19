@@ -12,20 +12,20 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`fromDom(tree, options?)`](#fromdomtree-options)
-    *   [`AfterTransform`](#aftertransform)
-    *   [`Options`](#options)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [Related](#related)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`fromDom(tree, options?)`](#fromdomtree-options)
+  * [`AfterTransform`](#aftertransform)
+  * [`Options`](#options)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [Related](#related)
+* [License](#license)
 
 ## What is this?
 
@@ -38,9 +38,9 @@ syntax tree.
 You can use this project when you want to use hast in browsers.
 This package is very small, but it does so by:
 
-*   …not providing positional information
-*   …potentially yielding varying results in different (especially older)
-    browsers
+* …not providing positional information
+* …potentially yielding varying results in different (especially older)
+  browsers
 
 The hast utility [`hast-util-to-dom`][hast-util-to-dom] does the inverse of this
 utility.
@@ -110,10 +110,10 @@ Transform a DOM tree to a hast tree.
 
 ###### Parameters
 
-*   `tree` ([`DomNode`][dom-node])
-    — DOM tree to transform
-*   `options` ([`Options`][api-options], optional)
-    — configuration
+* `tree` ([`DomNode`][dom-node])
+  — DOM tree to transform
+* `options` ([`Options`][api-options], optional)
+  — configuration
 
 ###### Returns
 
@@ -125,10 +125,10 @@ Callback called when each node is transformed (TypeScript type).
 
 ###### Parameters
 
-*   `domNode` ([`DomNode`][dom-node])
-    — DOM node that was handled
-*   `hastNode` ([`HastNode`][hast-node])
-    — corresponding hast node
+* `domNode` ([`DomNode`][dom-node])
+  — DOM node that was handled
+* `hastNode` ([`HastNode`][hast-node])
+  — corresponding hast node
 
 ###### Returns
 
@@ -140,8 +140,8 @@ Configuration (TypeScript type).
 
 ##### Fields
 
-*   `afterTransform` ([`AfterTransform`][api-after-transform], optional)
-    — callback called when each node is transformed
+* `afterTransform` ([`AfterTransform`][api-after-transform], optional)
+  — callback called when each node is transformed
 
 ##### Returns
 
@@ -180,14 +180,14 @@ abide by its terms.
 
 ## Related
 
-*   [`hast-util-from-html`][hast-util-from-html]
-    — parse hast from a string of HTML
-*   [`hast-util-sanitize`](https://github.com/syntax-tree/hast-util-sanitize)
-    — sanitize hast nodes
-*   [`hast-util-to-html`](https://github.com/syntax-tree/hast-util-to-html)
-    — serialize hast as HTML
-*   [`hast-util-to-dom`](https://github.com/syntax-tree/hast-util-to-dom)
-    — create DOM trees from hast
+* [`hast-util-from-html`][hast-util-from-html]
+  — parse hast from a string of HTML
+* [`hast-util-sanitize`](https://github.com/syntax-tree/hast-util-sanitize)
+  — sanitize hast nodes
+* [`hast-util-to-html`](https://github.com/syntax-tree/hast-util-to-html)
+  — serialize hast as HTML
+* [`hast-util-to-dom`](https://github.com/syntax-tree/hast-util-to-dom)
+  — create DOM trees from hast
 
 ## License
 

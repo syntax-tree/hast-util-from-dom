@@ -22,44 +22,47 @@ test('fromDom', async function (t) {
   })
 
   await t.test('should transform a complete document', async function () {
-    assert.deepEqual(fromDom(doc('<title>Hello!</title><h1>World!')), {
-      type: 'root',
-      children: [
-        {
-          type: 'element',
-          tagName: 'html',
-          properties: {},
-          children: [
-            {
-              type: 'element',
-              tagName: 'head',
-              properties: {},
-              children: [
-                {
-                  type: 'element',
-                  tagName: 'title',
-                  properties: {},
-                  children: [{type: 'text', value: 'Hello!'}]
-                }
-              ]
-            },
-            {
-              type: 'element',
-              tagName: 'body',
-              properties: {},
-              children: [
-                {
-                  type: 'element',
-                  tagName: 'h1',
-                  properties: {},
-                  children: [{type: 'text', value: 'World!'}]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    })
+    assert.deepEqual(
+      fromDom(parseDocument('<title>Hello!</title><h1>World!')),
+      {
+        type: 'root',
+        children: [
+          {
+            type: 'element',
+            tagName: 'html',
+            properties: {},
+            children: [
+              {
+                type: 'element',
+                tagName: 'head',
+                properties: {},
+                children: [
+                  {
+                    type: 'element',
+                    tagName: 'title',
+                    properties: {},
+                    children: [{type: 'text', value: 'Hello!'}]
+                  }
+                ]
+              },
+              {
+                type: 'element',
+                tagName: 'body',
+                properties: {},
+                children: [
+                  {
+                    type: 'element',
+                    tagName: 'h1',
+                    properties: {},
+                    children: [{type: 'text', value: 'World!'}]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    )
   })
 
   await t.test('should transform a fragment', async function () {
@@ -192,7 +195,7 @@ test('fixtures', async function (t) {
       const treeUrl = new URL(folder + '/index.json', base)
       const fixtureUrl = new URL(folder + '/index.html', base)
       const input = String(await fs.readFile(fixtureUrl))
-      const actual = fromDom(doc(input))
+      const actual = fromDom(parseDocument(input))
       /** @type {HastNodes} */
       let expected
 
@@ -237,6 +240,6 @@ function fragment(value) {
  * @param {string} value
  * @returns {Document}
  */
-function doc(value) {
+function parseDocument(value) {
   return new JSDOM(value).window.document
 }
