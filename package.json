@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "hastscript": "^8.0.0",
+    "hastscript": "^9.0.0",
     "web-namespaces": "^2.0.0"
   },
   "devDependencies": {
