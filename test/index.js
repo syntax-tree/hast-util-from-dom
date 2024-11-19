@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../lib/index.js').HastNodes} HastNodes
+ * @import {Nodes as HastNodes} from 'hast'
  */
 
 /* eslint-env browser */
